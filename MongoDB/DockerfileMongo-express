@@ -1,0 +1,10 @@
+FROM mongo-express:1.0.0-alpha.4
+USER 0
+RUN apk update
+RUN apk add tcpdump
+RUN apk add nmap
+
+#RUN tcpdump -i eth0
+#RUN apt update && apt-get install -y tcpdump && apt-get install -y nmap && tcpdump -i eth0
+#RUN apt-get update && apt-get install -y tcpdump && apt-get install -y nmap && tcpdump -i eth0
+#RUN microdnf update && microdnf install -y tcpdump && microdnf install -y nmap && tcpdump -i eth0

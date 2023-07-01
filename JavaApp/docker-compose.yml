@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  springboot-3:
+    container_name: springboot-3-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"   
+    restart: on-failure
+    networks:
+    - my-custom-network
+    
+networks:
+  my-custom-network:
+    external: true
+    
