@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: DockerfileMongo    
-    restart: always
+    #restart: always
     ports:
     - "27017:27017"
     # volume no esta definido
@@ -22,7 +22,7 @@ services:
     build:
       context: ./
       dockerfile: DockerfileMongo-express   
-    restart: always
+    #restart: always
     ports:
     - "8080:8081"
     depends_on:
