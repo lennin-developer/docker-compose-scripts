@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+    openldap-home:
+        image: obourdon/osixia-openldap:fix-v1.3.0
+        container_name: openldap-home
+        hostname: openldap-home-service
+        environment:
+          - LDAP_ORGANISATION=Home
+          - LDAP_DOMAIN=home.com
+          - LDAP_BASE_DN=dc=home,dc=com   #para login el user sera cn=admin,dc=home,dc=com y el password qDxNrLwjgHh6B5mkKa
+          - LDAP_ADMIN_PASSWORD=qDxNrLwjgHh6B5mkKa
+          - LDAP_TLS=false         
+        volumes:
+          - ./data1/ldap:/var/lib/ldap1
+          - ./data1/slapd.d:/etc/ldap/slapd1.d
+        ports:
+          - "389:389"
+          - "636:636"

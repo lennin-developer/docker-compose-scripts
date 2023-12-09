@@ -1,0 +1,60 @@
+version: '3.7'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
+    #container_name: elasticsearch    
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1       
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS= -Xms512m -Xmx512m"
+      - discovery.type=single-node
+    #volumes:
+    #  - ./data/elasticsearch/data:/usr/share/elasticsearch/data     
+    #networks:
+    #- my-custom-network
+    
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.16.2
+    #container_name: kibana    
+    #build:
+    #  context: ./
+    #  dockerfile: Dockerfile     
+    ports:
+    - "5601:5601"
+    #networks:
+    #- my-custom-network    
+    
+  logstash:
+    #image: docker.elastic.co/logstash/logstash:7.16.2
+    container_name: logstash
+    build:
+      context: ./
+      dockerfile: DockerfileLogStash     
+    volumes:
+      - ./conf/logstash.conf:/usr/share/logstash/config/logstash.conf
+      #- ./data/logstash/pipeline:/usr/share/logstash/pipelin
+    ports:
+    - "5000:5000" 
+    #networks:
+    #- my-custom-network    
+
+  #filebeat:
+    #image: docker.elastic.co/beats/filebeat:7.16.2
+    #container_name: filebeat    
+
+  #metricbeat:
+    #image: docker.elastic.co/beats/metricbeat:7.16.2
+    #container_name: metricbeat
+      
+    
+ 
+    
+#networks:
+#  my-custom-network:
+#    external: true     
